@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Home.css";
 import NewsArticle from "../../component/NewsArticle/NewsArticle";
-
-
 function Home() {
   const [news, setNews] = useState([]);
   const [searchQuery, setSearchQuery] = useState("nagpur");
-
   const loadNews = async () => {
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${searchQuery}&from=2023-09-10&sortBy=publishedAt&apiKey=979491a286344d55af49dee6cec71444`
+        `https://newsapi.org/v2/everything?q=${searchQuery}&from=2023-10-10&to=2023-10-10&sortBy=popularity&apiKey=5fb059a92803433aac471c22a544ad3e
+        `
       );
       setNews(response.data.articles);
+      console.log(response.data.articles)
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     loadNews();
   }, []);
@@ -28,9 +26,10 @@ function Home() {
   }, [searchQuery]);
   return (
     <>
-      <nav class="navbar navbar-dark bg-dark text-light">
-        <h3 className="text-center">News App🗞️</h3>
-        <form class="form-inline">
+ 
+      <nav>
+        <h3 className="text-center">News App</h3>
+        <form >
           <input
            className="text-center-search"
             type="search"
@@ -43,9 +42,11 @@ function Home() {
           />
         </form>
       </nav>
+      <div className="news-container">
 
-      <div className="news-container mt-3">
-        {news.map((newsArticles, index) => {
+        
+          {news.map((article, index) => {
+          console.log(article);
           const {
             author,
             title,
@@ -53,9 +54,11 @@ function Home() {
             url,
             urlToImage,
             publishedAt,
-            content,
-          } = newsArticles;
+          } = article;
+
           return (
+            <div className="news-card" >
+           
             <NewsArticle
               author={author}
               title={title}
@@ -63,13 +66,15 @@ function Home() {
               url={url}
               urlToImage={urlToImage}
               publishedAt={publishedAt}
-              content={content}
             />
+              </div>
+          
           );
         })}
       </div>
+    
+      
     </>
   );
 }
-
 export default Home;

@@ -1,0 +1,11 @@
+.news-card{
+padding: 10px;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+border: 1px solid gray;
+width: 400px;
+box-shadow: 0 1px 2pc gray;
+margin-bottom: 20px;
+border-radius: 5px;
+}

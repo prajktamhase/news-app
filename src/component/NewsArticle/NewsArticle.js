@@ -1,16 +1,16 @@
 import React from "react";
 import "./NewsArticle.css"
-export default function NewsArticle(urlToImage, title, author, description, url, PublishedAt, content) {
+export default function NewsArticle({author, title, description, url, urlToImage, publishedAt}) {
+    
     return (
         <>
-            <div >
+            <div>
                 <img src={urlToImage} className="news-image" />
                 <h1>{title}</h1>
                 <h3>{author}</h3>
                 <p>{description}</p>
-                <h5>{PublishedAt}</h5>
-                <p>{content}</p>
-                <a href={url} target="_blank">Read More</a>
+                <h5>{publishedAt}</h5>
+                <a href={url} target="blank">Read More</a>
             </div>
         </>
     )
